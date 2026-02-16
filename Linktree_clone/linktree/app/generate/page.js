@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useSearchParams, useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 const Generate = () => {
 
     const searchParams=useSearchParams()
