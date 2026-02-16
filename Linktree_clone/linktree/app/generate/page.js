@@ -1,23 +1,27 @@
 
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const Generate = () => {
 
-    const searchParams=useSearchParams()
-
-    // const [link, setlink] = useState("")
-    // const [linktext, setlinktext] = useState("")
-
+    const searchParams = useSearchParams()
     const [links, setLinks] = useState([{ link: "", linktext: "" }])
-    const [handle, sethandle] = useState(searchParams.get("handle"))
+    const [handle, sethandle] = useState("")
     const [desc, setdesc] = useState("")
     const [pic, setpic] = useState("")
     const router = useRouter()
+
+    useEffect(() => {
+        const handleFromParams = searchParams?.get("handle");
+        if (handleFromParams) {
+            sethandle(handleFromParams);
+        }
+    }, [searchParams]);
 
     const handleChange = (index, link, linktext) => {
         setLinks((initialLinks) => {
